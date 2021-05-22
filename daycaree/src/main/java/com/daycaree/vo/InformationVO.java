@@ -4,8 +4,6 @@ public class InformationVO {
 	private int i_number;
 	private String i_name;
 	private String i_address;
-	private String i_rati;
-	private String i_longi;
 	private String i_loca;
 	private String i_type;
 	private String i_state;
@@ -45,18 +43,7 @@ public class InformationVO {
 	public void setI_address(String i_address) {
 		this.i_address = i_address;
 	}
-	public String getI_rati() {
-		return i_rati;
-	}
-	public void setI_rati(String i_rati) {
-		this.i_rati = i_rati;
-	}
-	public String getI_longi() {
-		return i_longi;
-	}
-	public void setI_longi(String i_longi) {
-		this.i_longi = i_longi;
-	}
+	
 	public String getI_loca() {
 		return i_loca;
 	}
@@ -177,17 +164,18 @@ public class InformationVO {
 	public void setI_system(String i_system) {
 		this.i_system = i_system;
 	}
-	
 	@Override
 	public String toString() {
-		return "InformationVO [i_number=" + i_number + ", i_name=" + i_name + ", i_address=" + i_address + ", i_rati="
-				+ i_rati + ", i_longi=" + i_longi + ", i_loca=" + i_loca + ", i_type=" + i_type + ", i_state=" + i_state
-				+ ", i_cctv=" + i_cctv + ", i_cctv_all=" + i_cctv_all + ", i_cctv_bo=" + i_cctv_bo + ", i_cctv_gong="
-				+ i_cctv_gong + ", i_cctv_nol=" + i_cctv_nol + ", i_cctv_sik=" + i_cctv_sik + ", i_cctv_gang="
-				+ i_cctv_gang + ", i_cctv_jo=" + i_cctv_jo + ", i_cctv_bok=" + i_cctv_bok + ", i_cctv_office="
-				+ i_cctv_office + ", i_cctv_yang=" + i_cctv_yang + ", i_cctv_out=" + i_cctv_out + ", i_cctv_time="
-				+ i_cctv_time + ", i_cctv_hd=" + i_cctv_hd + ", i_cctv_date=" + i_cctv_date + ", i_cctv_money="
-				+ i_cctv_money + ", i_system=" + i_system + "]";
+		return "InformationVO [i_number=" + i_number + ", i_name=" + i_name + ", i_address=" + i_address + ", i_loca="
+				+ i_loca + ", i_type=" + i_type + ", i_state=" + i_state + ", i_cctv=" + i_cctv + ", i_cctv_all="
+				+ i_cctv_all + ", i_cctv_bo=" + i_cctv_bo + ", i_cctv_gong=" + i_cctv_gong + ", i_cctv_nol="
+				+ i_cctv_nol + ", i_cctv_sik=" + i_cctv_sik + ", i_cctv_gang=" + i_cctv_gang + ", i_cctv_jo="
+				+ i_cctv_jo + ", i_cctv_bok=" + i_cctv_bok + ", i_cctv_office=" + i_cctv_office + ", i_cctv_yang="
+				+ i_cctv_yang + ", i_cctv_out=" + i_cctv_out + ", i_cctv_time=" + i_cctv_time + ", i_cctv_hd="
+				+ i_cctv_hd + ", i_cctv_date=" + i_cctv_date + ", i_cctv_money=" + i_cctv_money + ", i_system="
+				+ i_system + "]";
 	}
+	
+	
 	
 }

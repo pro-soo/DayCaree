@@ -13,4 +13,8 @@
     <select id="selectOne" parameterType="int" resultType="InformationVO">
         select * from information where i_number=#{i_number}
     </select>
+    
+    <select id="search" parameterType="String" resultType="InformationVO">
+        select * from information where i_name=#{i_name}
+    </select>
 </mapper>

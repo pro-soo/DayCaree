@@ -93,7 +93,8 @@
 							</colgroup>
 							<thead>
 							<tr>
-							<th colspan="3" style="text-align: right"><input id="search" type="text"></th>
+							<th colspan="3" style="text-align: right"><input id="search" type="text">
+							<input id="" type="hidden"></th>
 							<th colspan="3" style="text-align: right"><button type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
 							</tr>
 								<tr>
@@ -219,7 +220,20 @@
 	
 	<script type="text/javascript">
 		function searchOne(){
-			var i_name = $('#i_name').val();
+			var i_name = $('#search').val();				
+			consol.log("test : ");
+			$.ajax({
+				url: 'searchOne.do',
+				type: 'post',
+				data: i_name,
+				sucess: function(search){
+					alert(search+'');
+				},
+				error: function(){
+					alert('error');
+				}
+				
+			});
 			
 		}
 	</script>

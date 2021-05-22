@@ -30,4 +30,9 @@ public class daycareeServiceImpl implements daycareeService{
 		return mapper.selectOne(i_number);
 	}
 
+	@Override
+	public List<?> search(String i_name) throws Exception {	// 검색 기능
+		return mapper.search(i_name);
+	}
+
 }

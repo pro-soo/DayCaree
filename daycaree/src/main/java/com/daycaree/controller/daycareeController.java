@@ -1,5 +1,6 @@
 package com.daycaree.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 
@@ -87,4 +88,16 @@ public class daycareeController {
 		return "selectOne";
 	}
 	
+	@RequestMapping(value="/searchOne.do", method=RequestMethod.POST)	// 검색하기 기능
+	public void searchOne(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		System.out.println("넘어온다.");
+		String i_name = request.getParameter("i_name");
+		System.out.println(i_name);
+		
+		List<?> search = daycareeService.search(i_name);
+		System.out.println(search);
+		response.setContentType("text/plain;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(search);
+	}
 }
