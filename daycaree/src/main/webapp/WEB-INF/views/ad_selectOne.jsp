@@ -74,58 +74,8 @@ tr td, th {
 				<div class="col-xs-12 col-md-8 col-md-offset-2">
 					<h2 class="text-center">상세정보</h2>
 					<p></p>
-
-					<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b746de34a877fc1e36118c594a3112e2&libraries=services,clusterer,drawing"></script>
-					<div id="map" style="width: 100%; height: 400px;"></div>
-					<script>
-						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-						mapOption = {
-							center : new kakao.maps.LatLng(33.450701,
-									126.570667), // 지도의 중심좌표
-							level : 3
-						// 지도의 확대 레벨
-						};
-
-						// 지도를 생성합니다    
-						var map = new kakao.maps.Map(mapContainer, mapOption);
-
-						// 주소-좌표 변환 객체를 생성합니다
-						var geocoder = new kakao.maps.services.Geocoder();
-
-						// 주소로 좌표를 검색합니다
-						geocoder
-								.addressSearch(
-										'${one[0].i_address}',
-										function(result, status) {
-
-											// 정상적으로 검색이 완료됐으면 
-											if (status === kakao.maps.services.Status.OK) {
-
-												var coords = new kakao.maps.LatLng(
-														result[0].y,
-														result[0].x);
-
-												// 결과값으로 받은 위치를 마커로 표시합니다
-												var marker = new kakao.maps.Marker(
-														{
-															map : map,
-															position : coords
-														});
-
-												// 인포윈도우로 장소에 대한 설명을 표시합니다
-												var infowindow = new kakao.maps.InfoWindow(
-														{
-															content : '<div style="width:150px;text-align:center;padding:6px 0;">${one[0].i_name}</div>'
-														});
-												infowindow.open(map, marker);
-
-												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-												map.setCenter(coords);
-											}
-										});
-					</script>
+					
+					<form method="post">
 					<c:forEach var="vo" items="${one}">
 						<table class="table table-hover" style="width: 100%">
 							<colgroup>
@@ -134,149 +84,110 @@ tr td, th {
 							</colgroup>
 							<tr>
 								<th>어린이집 이름</th>
-								<td>${vo.i_name }</td>
+								<td><input type="text" name="i_name" id="i_name" value="${vo.i_name }"></td>
+								<td><input type="hidden" name="i_number" id="i_number" value="${vo.i_number }"></td>
 							</tr>
 							<tr>
 								<th>지역</th>
-								<td>${vo.i_loca}</td>
+								<td><input type="text" name="i_loca" id="i_loca" value="${vo.i_loca }"></td>
 							</tr>
 							<tr>
 								<th>어린이집 주소</th>
-								<td>${vo.i_address}</td>
+								<td><input type="text" name="i_address" id="i_address" value="${vo.i_address }"></td>
 							</tr>
 							<tr>
 								<th>어린이집 유형</th>
-								<td>${vo.i_type}</td>
+								<td><input type="text" name="i_type" id="i_type" value="${vo.i_type }"></td>
 							</tr>
 
 							<tr>
 								<th>어린이집 상태</th>
-								<td>${vo.i_state}</td>
+								<td><input type="text" name="i_state" id="i_state" value="${vo.i_state }"></td>
 							</tr>
 							<tr>
 								<th>설치구분</th>
-								<td>${vo.i_cctv}</td>
+								<td><input type="text" name="i_cctv" id="i_cctv" value="${vo.i_cctv }"></td>
 							</tr>
 							<tr>
 								<th>총 설치대수</th>
-								<td>${vo.i_cctv_all}대</td>
+								<td><input type="text" name="i_cctv_all" id="i_cctv_all" value="${vo.i_cctv_all }"></td>
 							</tr>
 							<tr>
 								<th>필수설치_보육실</th>
-								<td>${vo.i_cctv_bo}대</td>
+								<td><input type="text" name="i_cctv_bo" id="i_cctv_bo" value="${vo.i_cctv_bo }"></td>
 							</tr>
 							<tr>
 								<th>필수설치_공동놀이실</th>
-								<td>${vo.i_cctv_gong}대</td>
+								<td><input type="text" name="i_cctv_gong" id="i_cctv_gong" value="${vo.i_cctv_gong }"></td>
 							</tr>
 							<tr>
 								<th>필수설치_놀이터</th>
-								<td>${vo.i_cctv_nol}대</td>
+								<td><input type="text" name="i_cctv_nol" id="i_cctv_nol" value="${vo.i_cctv_nol }"></td>
 							</tr>
 							<tr>
 								<th>필수설치_식당</th>
-								<td>${vo.i_cctv_sik}대</td>
+								<td><input type="text" name="i_cctv_sik" id="i_cctv_sik" value="${vo.i_cctv_sik }"></td>
 							</tr>
 							<tr>
 								<th>필수설치_강당</th>
-								<td>${vo.i_cctv_gang}대</td>
+								<td><input type="text" name="i_cctv_gang" id="i_cctv_gang" value="${vo.i_cctv_gang }"></td>
 							</tr>
 							<tr>
 								<th>조리실</th>
-								<td>${vo.i_cctv_jo}대</td>
+								<td><input type="text" name="i_cctv_jo" id="i_cctv_jo" value="${vo.i_cctv_jo }"></td>
 							</tr>
 							<tr>
 								<th>복도, 현관</th>
-								<td>${vo.i_cctv_bok}대</td>
+								<td><input type="text" name="i_cctv_bok" id="i_cctv_bok" value="${vo.i_cctv_bok }"></td>
 							</tr>
 							<tr>
 								<th>사무실</th>
-								<td>${vo.i_cctv_office}대</td>
+								<td><input type="text" name="i_cctv_office" id="i_cctv_office" value="${vo.i_cctv_office }"></td>
 							</tr>
 							<tr>
 								<th>양호실</th>
-								<td>${vo.i_cctv_yang}대</td>
+								<td><input type="text" name="i_cctv_yang" id="i_cctv_yang" value="${vo.i_cctv_yang }"></td>
 							</tr>
 							<tr>
 								<th>건물외부</th>
-								<td>${vo.i_cctv_out}대</td>
+								<td><input type="text" name="i_cctv_out" id="i_cctv_out" value="${vo.i_cctv_out }"></td>
 							</tr>
 							<tr>
 								<th>영상정보 보존기간</th>
-								<td>${vo.i_cctv_time}</td>
+								<td><input type="text" name="i_cctv_time" id="i_cctv_time" value="${vo.i_cctv_time }"></td>
 							</tr>
 							<tr>
 								<th>영상 화질</th>
-								<td>${vo.i_cctv_hd}</td>
+								<td><input type="text" name="i_cctv_hd" id="i_cctv_hd" value="${vo.i_cctv_hd }"></td>
 							</tr>
 							<tr>
 								<th>설치일자</th>
-								<td>${vo.i_cctv_date}</td>
+								<td><input type="text" id="i_cctv_date" name="i_cctv_date" value="${vo.i_cctv_date }"></td>
 							</tr>
 							<tr>
 								<th>설치운영비용</th>
-								<td>${vo.i_cctv_money}</td>
+								<td><input type="text" id="i_cctv_money" name="i_cctv_money" value="${vo.i_cctv_money }"></td>
 							</tr>
 							<tr>
 								<th>운영방식</th>
-								<td>${vo.i_system}</td>
+								<td><input type="text" id="i_system" name="i_system" value="${vo.i_system }"></td>
+							</tr>
+							<tr>
+							<td colspan="2">
+							<button class="btn btn-primary" type="button" onclick="updateDay()">수정</button>
+							<button class="btn btn-primary" type="reset">취소</button>
+							</td>
 							</tr>
 						</table>
 					</c:forEach>
+					</form>
 
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="section-container">
-		<div class="container">
-			<div class="row section-container-spacer">
-				<div class="col-xs-12 col-md-8 col-md-offset-2">
-					<h2 class="text-center">More</h2>
-					<div class="section-container-spacer">
-						<p>Praesent at feugiat est, at faucibus ipsum. Aenean
-							condimentum mauris vel malesuada pulvinar. Vestibulum sit amet
-							hendrerit leo, quis vehicula mi.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-							ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-							aute irure dolor in reprehenderit in voluptate velit esse cillum
-							dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-							cupidatat non proident, sunt in culpa qui officia deserunt mollit
-							anim id est laborum.</p>
-					</div>
-					<img src="./resources/images/img-05.jpg" alt=""
-						class="img-responsive reveal-content" data-action="zoom">
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="section-container">
-		<div class="container text-center">
-			<div class="row section-container-spacer">
-				<div class="col-xs-12 col-md-12">
-
-					<h3>Do you like it ?</h3>
-					<p>
-						<a href="https://facebook.com/" class="social-round-icon fa-icon"
-							title=""> <i class="fa fa-facebook" aria-hidden="true"></i>
-						</a> <a href="https://twitter.com/" class="social-round-icon fa-icon"
-							title=""> <i class="fa fa-twitter" aria-hidden="true"></i>
-						</a> <a href="https://www.linkedin.com/"
-							class="social-round-icon fa-icon" title=""> <i
-							class="fa fa-linkedin" aria-hidden="true"></i>
-						</a>
-					</p>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-	<footer class="footer-container white-text-container">
+		<footer class="footer-container white-text-container">
 		<div class="container">
 			<div class="row">
 
@@ -322,6 +233,74 @@ tr td, th {
 			scrollRevelation('.reveal');
 		});
 	</script>
+	<script type="text/javascript">
+		function updateDay(){
+				var i_number = $('#i_number').val();
+				var i_name = $('#i_name').val();
+				var i_address = $('#i_address').val();
+				var i_loca = $('#i_loca').val();
+				var i_type = $('#i_type').val();
+				var i_state = $('#i_state').val();
+				var i_cctv = $('#i_cctv').val();
+				var i_cctv_all = $('#i_cctv_all').val();
+				var i_cctv_bo = $('#i_cctv_bo').val();
+				var i_cctv_gong = $('#i_cctv_gong').val();
+				var i_cctv_nol = $('#i_cctv_nol').val();
+				var i_cctv_sik = $('#i_cctv_sik').val();
+				var i_cctv_gang = $('#i_cctv_gang').val();
+				var i_cctv_jo = $('#i_cctv_jo').val();
+				var i_cctv_bok = $('#i_cctv_bok').val();
+				var i_cctv_office = $('#i_cctv_office').val();
+				var i_cctv_yang = $('#i_cctv_yang').val();
+				var i_cctv_out = $('#i_cctv_out').val();
+				var i_cctv_time = $('#i_cctv_time').val();
+				var i_cctv_hd = $('#i_cctv_hd').val();
+				var i_cctv_date = $('#i_cctv_date').val();
+				var i_cctv_money = $('#i_cctv_money').val();
+				var i_system = $('#i_system').val();
+			$.ajax({
+				url:'updateOne.do',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					i_number:i_number,
+					i_name:i_name,
+					i_address: i_address,
+					i_loca: i_loca,
+					i_type: i_type,
+					i_state: i_state,
+					i_cctv: i_cctv,
+					i_cctv_all: i_cctv_all,
+					i_cctv_bo: i_cctv_bo,
+					i_cctv_gong: i_cctv_gong,
+					i_cctv_nol: i_cctv_nol,
+					i_cctv_sik: i_cctv_sik,
+					i_cctv_gang: i_cctv_gang,
+					i_cctv_jo: i_cctv_jo,
+					i_cctv_bok: i_cctv_bok,
+					i_cctv_office: i_cctv_office,
+					i_cctv_yang: i_cctv_yang,
+					i_cctv_out: i_cctv_out,
+					i_cctv_time: i_cctv_time,
+					i_cctv_hd: i_cctv_hd,
+					i_cctv_date: i_cctv_date,
+					i_cctv_money: i_cctv_money,
+					i_system:i_system
+					
+				},
+				success:function(response){
+					if (response == 1) {						
+					//location.href='./ad_selectOne.do';
+					alert('정상적으로 수정되었습니다.');
+					}
+				},
+				error: function(){
+					alert('Error!');
+				}
+			});
+		}
+	</script>
+	
 
 	
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 

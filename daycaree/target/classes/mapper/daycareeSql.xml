@@ -13,4 +13,17 @@
     <select id="selectOne" parameterType="int" resultType="InformationVO">
         select * from information where i_number=#{i_number}
     </select>
+    
+    <select id="selectWarning" resultType="WarningVO">
+        select * from warning
+    </select>
+    
+    <select id="search" parameterType="String" resultType="InformationVO">
+        select * from information where i_name=#{i_name}
+    </select>
+    
+    <update id="update" parameterType="InformationVO">
+        update information set i_name=#{i_name}, i_address=#{i_address}, i_loca=#{i_loca}, i_type=#{i_type}, i_state=#{i_state}, i_cctv=#{i_cctv}, i_cctv_all=#{i_cctv_all}, i_cctv_bo=#{i_cctv_bo}, i_cctv_gong=#{i_cctv_gong}, i_cctv_nol=#{i_cctv_nol}, i_cctv_sik=#{i_cctv_sik}, i_cctv_gang=#{i_cctv_gang}, i_cctv_jo=#{i_cctv_jo},
+        i_cctv_bok=#{i_cctv_bok}, i_cctv_office=#{i_cctv_office}, i_cctv_yang=#{i_cctv_yang}, i_cctv_out=#{ i_cctv_out}, i_cctv_time=#{i_cctv_time}, i_cctv_hd=#{i_cctv_hd}, i_cctv_date=#{ i_cctv_date}, i_cctv_money=#{i_cctv_money}, i_system=#{i_system} where i_number=#{i_number}
+    </update>
 </mapper>

@@ -30,7 +30,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<title>어린이집 상세보기 페이지</title>
+<title>전체 어린이집 정보 페이지</title>
 
 <link href="./resources/css/main.550dcf66.css" rel="stylesheet">
 <style type="text/css">
@@ -49,9 +49,9 @@ tr td, th {
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#navbar-collapse"
 						aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span> <span
+						<span class="sr-only">Toggle navigation</span><span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
+							class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
 					<p class="navbar-brand">
 						<img src="./resources/images/mashup-icon.svg"
@@ -61,7 +61,15 @@ tr td, th {
 
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
-						
+						<li><a title="">${list[0].m_id}님 환영합니다!</a></li>
+						<li><a href="./allday.do" title="">Home</a></li>
+						<li><a href="./project.html" title="">Project</a></li>
+						<li>
+							<p>
+								<a href="./components.html" class="btn btn-default navbar-btn"
+									title="">Components</a>
+							</p>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -72,154 +80,40 @@ tr td, th {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-8 col-md-offset-2">
-					<h2 class="text-center">상세정보</h2>
+					<h1 class="text-center">Information</h1>
 					<p></p>
 
-					<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b746de34a877fc1e36118c594a3112e2&libraries=services,clusterer,drawing"></script>
-					<div id="map" style="width: 100%; height: 400px;"></div>
-					<script>
-						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-						mapOption = {
-							center : new kakao.maps.LatLng(33.450701,
-									126.570667), // 지도의 중심좌표
-							level : 3
-						// 지도의 확대 레벨
-						};
-
-						// 지도를 생성합니다    
-						var map = new kakao.maps.Map(mapContainer, mapOption);
-
-						// 주소-좌표 변환 객체를 생성합니다
-						var geocoder = new kakao.maps.services.Geocoder();
-
-						// 주소로 좌표를 검색합니다
-						geocoder
-								.addressSearch(
-										'${one[0].i_address}',
-										function(result, status) {
-
-											// 정상적으로 검색이 완료됐으면 
-											if (status === kakao.maps.services.Status.OK) {
-
-												var coords = new kakao.maps.LatLng(
-														result[0].y,
-														result[0].x);
-
-												// 결과값으로 받은 위치를 마커로 표시합니다
-												var marker = new kakao.maps.Marker(
-														{
-															map : map,
-															position : coords
-														});
-
-												// 인포윈도우로 장소에 대한 설명을 표시합니다
-												var infowindow = new kakao.maps.InfoWindow(
-														{
-															content : '<div style="width:150px;text-align:center;padding:6px 0;">${one[0].i_name}</div>'
-														});
-												infowindow.open(map, marker);
-
-												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-												map.setCenter(coords);
-											}
-										});
-					</script>
-					<c:forEach var="vo" items="${one}">
+					<table class="table table-hover" style="width: 100%">
+						<colgroup>
+							<col style="width: 8%">
+							<col style="width: 22%">
+							<col style="width: 70%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th colspan="3" style="text-align: right"><input
+									id="search" type="text"> <input id="" type="hidden"></th>
+								<th colspan="3" style="text-align: right"><button
+										type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
+							</tr>
+							<tr>
+								<th>번호</th>
+								<th>어린이집 이름</th>
+								<th>어린이집 주소</th>
+							</tr>
+						</thead>
+					</table>
+					<c:forEach var="vo" items="${all}">
 						<table class="table table-hover" style="width: 100%">
 							<colgroup>
-								<col style="width: 40%">
-								<col style="width: 60%">
+								<col style="width: 8%">
+								<col style="width: 22%">
+								<col style="width: 70%">
 							</colgroup>
-							<tr>
-								<th>어린이집 이름</th>
-								<td>${vo.i_name }</td>
-							</tr>
-							<tr>
-								<th>지역</th>
-								<td>${vo.i_loca}</td>
-							</tr>
-							<tr>
-								<th>어린이집 주소</th>
+							<tr onclick="selectOne(${vo.i_number})">
+								<td id="i_number">${vo.i_number}</td>
+								<td id="i_name">${vo.i_name }</td>
 								<td>${vo.i_address}</td>
-							</tr>
-							<tr>
-								<th>어린이집 유형</th>
-								<td>${vo.i_type}</td>
-							</tr>
-
-							<tr>
-								<th>어린이집 상태</th>
-								<td>${vo.i_state}</td>
-							</tr>
-							<tr>
-								<th>설치구분</th>
-								<td>${vo.i_cctv}</td>
-							</tr>
-							<tr>
-								<th>총 설치대수</th>
-								<td>${vo.i_cctv_all}대</td>
-							</tr>
-							<tr>
-								<th>필수설치_보육실</th>
-								<td>${vo.i_cctv_bo}대</td>
-							</tr>
-							<tr>
-								<th>필수설치_공동놀이실</th>
-								<td>${vo.i_cctv_gong}대</td>
-							</tr>
-							<tr>
-								<th>필수설치_놀이터</th>
-								<td>${vo.i_cctv_nol}대</td>
-							</tr>
-							<tr>
-								<th>필수설치_식당</th>
-								<td>${vo.i_cctv_sik}대</td>
-							</tr>
-							<tr>
-								<th>필수설치_강당</th>
-								<td>${vo.i_cctv_gang}대</td>
-							</tr>
-							<tr>
-								<th>조리실</th>
-								<td>${vo.i_cctv_jo}대</td>
-							</tr>
-							<tr>
-								<th>복도, 현관</th>
-								<td>${vo.i_cctv_bok}대</td>
-							</tr>
-							<tr>
-								<th>사무실</th>
-								<td>${vo.i_cctv_office}대</td>
-							</tr>
-							<tr>
-								<th>양호실</th>
-								<td>${vo.i_cctv_yang}대</td>
-							</tr>
-							<tr>
-								<th>건물외부</th>
-								<td>${vo.i_cctv_out}대</td>
-							</tr>
-							<tr>
-								<th>영상정보 보존기간</th>
-								<td>${vo.i_cctv_time}</td>
-							</tr>
-							<tr>
-								<th>영상 화질</th>
-								<td>${vo.i_cctv_hd}</td>
-							</tr>
-							<tr>
-								<th>설치일자</th>
-								<td>${vo.i_cctv_date}</td>
-							</tr>
-							<tr>
-								<th>설치운영비용</th>
-								<td>${vo.i_cctv_money}</td>
-							</tr>
-							<tr>
-								<th>운영방식</th>
-								<td>${vo.i_system}</td>
 							</tr>
 						</table>
 					</c:forEach>
@@ -323,7 +217,34 @@ tr td, th {
 		});
 	</script>
 
-	
+	<script type="text/javascript">
+		function searchOne(){
+			var i_name = $('#search').val();				
+			consol.log("test : ");
+			$.ajax({
+				url: 'searchOne.do',
+				type: 'post',
+				data: i_name,
+				sucess: function(search){
+					alert(search+'');
+				},
+				error: function(){
+					alert('error');
+				}
+				
+			});
+			
+		}
+	</script>
+	<script type="text/javascript">
+		function selectOne(i_number){
+			var url = 'selectOne.do?i_number='+i_number;
+			var name = 'SelectOne';
+			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
+			window.open(url, name, option);
+		}
+	</script>
+
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
 
 <script>

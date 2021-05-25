@@ -111,10 +111,10 @@ tr td, th {
 								<col style="width: 22%">
 								<col style="width: 70%">
 							</colgroup>
-							<tr onclick="selectOne(${vo.i_number})">
-								<td id="i_number">${vo.i_number}</td>
-								<td id="i_name">${vo.i_name }</td>
-								<td>${vo.i_address}</td>
+							<tr onclick="selectOne(${vo.w_number})">
+								<td id="w_number">${vo.w_number}</td>
+								<td id="w_name">${vo.w_name }</td>
+								<td>${vo.w_address}</td>
 							</tr>
 						</table>
 					</c:forEach>
@@ -191,8 +191,8 @@ tr td, th {
 		}
 	</script>
 	<script type="text/javascript">
-		function selectOne(i_number){
-			var url = 'selectOne.do?i_number='+i_number;
+		function selectOne(w_number){
+			var url = 'selectOne.do?i_number='+w_number;
 			var name = 'SelectOne';
 			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
 			window.open(url, name, option);

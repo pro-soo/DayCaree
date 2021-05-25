@@ -61,9 +61,10 @@ tr td, th {
 
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a title="">${list[0].m_id}님 환영합니다!</a></li>
+						<li><a title="">${list[0].m_id} 상태입니다!</a></li>
 						<li><a href="./allday.do" title="">Home</a></li>
-						<li><a href="./warning.do" title="">위반시설 조회</a></li>
+						<li><a href="./project.html" title="">어린이집 등록</a></li>
+						<li><a href="./project.html" title="">위반시설 등록</a></li>
 						<li><a href="./project.html" title="">공지사항</a></li>
 						<li>
 							<p>
@@ -192,8 +193,8 @@ tr td, th {
 	</script>
 	<script type="text/javascript">
 		function selectOne(i_number){
-			var url = 'selectOne.do?i_number='+i_number;
-			var name = 'SelectOne';
+			var url = 'ad_selectOne.do?i_number='+i_number;
+			var name = 'ad_SelectOne';
 			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
 			window.open(url, name, option);
 		}
