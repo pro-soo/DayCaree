@@ -72,11 +72,10 @@ tr td, th {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-8 col-md-offset-2">
-					<h2 class="text-center">정보수정</h2>
+					<h2 class="text-center">정보등록</h2>
 					<p></p>
 					
 					<form method="post">
-					<c:forEach var="vo" items="${one}">
 						<table class="table table-hover" style="width: 100%">
 							<colgroup>
 								<col style="width: 40%">
@@ -84,103 +83,100 @@ tr td, th {
 							</colgroup>
 							<tr>
 								<th>어린이집 이름</th>
-								<td><input type="text" class="form-control input-sm" name="i_name" id="i_name" value="${vo.i_name }"></td>
-								<td><input type="hidden" class="form-control input-sm" name="i_number" id="i_number" value="${vo.i_number }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_name" id="i_name" value=" "></td>
 							</tr>
 							<tr>
 								<th>지역</th>
-								<td><input type="text" class="form-control input-sm" name="i_loca" id="i_loca" value="${vo.i_loca }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_loca" id="i_loca" value=" "></td>
 							</tr>
 							<tr>
 								<th>어린이집 주소</th>
-								<td><input type="text" class="form-control input-sm" name="i_address" id="i_address" value="${vo.i_address }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_address" id="i_address" value=" "></td>
 							</tr>
 							<tr>
 								<th>어린이집 유형</th>
-								<td><input type="text" class="form-control input-sm" name="i_type" id="i_type" value="${vo.i_type }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_type" id="i_type" value=" "></td>
 							</tr>
 
 							<tr>
 								<th>어린이집 상태</th>
-								<td><input type="text"  class="form-control input-sm" name="i_state" id="i_state" value="${vo.i_state }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_state" id="i_state" value=" "></td>
 							</tr>
 							<tr>
 								<th>설치구분</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv" id="i_cctv" value="${vo.i_cctv }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv" id="i_cctv" value=" "></td>
 							</tr>
 							<tr>
 								<th>총 설치대수</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_all" id="i_cctv_all" value="${vo.i_cctv_all }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_all" id="i_cctv_all" value="0"></td>
 							</tr>
 							<tr>
 								<th>필수설치_보육실</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_bo" id="i_cctv_bo" value="${vo.i_cctv_bo }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_bo" id="i_cctv_bo" value="0"></td>
 							</tr>
 							<tr>
 								<th>필수설치_공동놀이실</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_gong" id="i_cctv_gong" value="${vo.i_cctv_gong }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_gong" id="i_cctv_gong" value="0"></td>
 							</tr>
 							<tr>
 								<th>필수설치_놀이터</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_nol" id="i_cctv_nol" value="${vo.i_cctv_nol }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_nol" id="i_cctv_nol" value="0"></td>
 							</tr>
 							<tr>
 								<th>필수설치_식당</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_sik" id="i_cctv_sik" value="${vo.i_cctv_sik }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_sik" id="i_cctv_sik" value="0"></td>
 							</tr>
 							<tr>
 								<th>필수설치_강당</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_gang" id="i_cctv_gang" value="${vo.i_cctv_gang }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_gang" id="i_cctv_gang" value="0"></td>
 							</tr>
 							<tr>
 								<th>조리실</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_jo" id="i_cctv_jo" value="${vo.i_cctv_jo }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_jo" id="i_cctv_jo" value="0"></td>
 							</tr>
 							<tr>
 								<th>복도, 현관</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_bok" id="i_cctv_bok" value="${vo.i_cctv_bok }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_bok" id="i_cctv_bok" value="0"></td>
 							</tr>
 							<tr>
 								<th>사무실</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_office" id="i_cctv_office" value="${vo.i_cctv_office }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_office" id="i_cctv_office" value="0"></td>
 							</tr>
 							<tr>
 								<th>양호실</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_yang" id="i_cctv_yang" value="${vo.i_cctv_yang }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_yang" id="i_cctv_yang" value="0"></td>
 							</tr>
 							<tr>
 								<th>건물외부</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_out" id="i_cctv_out" value="${vo.i_cctv_out }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_out" id="i_cctv_out" value="0"></td>
 							</tr>
 							<tr>
 								<th>영상정보 보존기간</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_time" id="i_cctv_time" value="${vo.i_cctv_time }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_time" id="i_cctv_time" value=" "></td>
 							</tr>
 							<tr>
 								<th>영상 화질</th>
-								<td><input type="text" class="form-control input-sm" name="i_cctv_hd" id="i_cctv_hd" value="${vo.i_cctv_hd }"></td>
+								<td><input type="text" class="form-control input-sm" name="i_cctv_hd" id="i_cctv_hd" value=" "></td>
 							</tr>
 							<tr>
 								<th>설치일자</th>
-								<td><input type="text" class="form-control input-sm" id="i_cctv_date" name="i_cctv_date" value="${vo.i_cctv_date }"></td>
+								<td><input type="text" class="form-control input-sm" id="i_cctv_date" name="i_cctv_date" value=" "></td>
 							</tr>
 							<tr>
 								<th>설치운영비용</th>
-								<td><input type="text" class="form-control input-sm" id="i_cctv_money" name="i_cctv_money" value="${vo.i_cctv_money }"></td>
+								<td><input type="text" class="form-control input-sm" id="i_cctv_money" name="i_cctv_money" value=" "></td>
 							</tr>
 							<tr>
 								<th>운영방식</th>
-								<td><input type="text" class="form-control input-sm" id="i_system" name="i_system" value="${vo.i_system }"></td>
+								<td><input type="text" class="form-control input-sm" id="i_system" name="i_system" value=" "></td>
 							</tr>
 							<tr>
 							<td colspan="3">
-							<button class="btn btn-primary" type="button" onclick="updateDay()">수정</button>
+							<button class="btn btn-primary" type="button" onclick="insertDay()">등록하기</button>
 							<button class="btn btn-warning" type="reset">취소</button>
-							<button class="btn btn-danger" type="button" onclick="deleteDay()">삭제</button>
 							</td>
 							</tr>
 						</table>
-					</c:forEach>
 					</form>
 
 				</div>
@@ -235,8 +231,7 @@ tr td, th {
 		});
 	</script>
 	<script type="text/javascript">
-		function updateDay(){
-				var i_number = $('#i_number').val();
+		function insertDay(){
 				var i_name = $('#i_name').val();
 				var i_address = $('#i_address').val();
 				var i_loca = $('#i_loca').val();
@@ -260,11 +255,10 @@ tr td, th {
 				var i_cctv_money = $('#i_cctv_money').val();
 				var i_system = $('#i_system').val();
 			$.ajax({
-				url:'updateOne.do',
+				url:'ad_insertDay.do',
 				type: 'post',
 				dataType: 'json',
 				data: {
-					i_number:i_number,
 					i_name:i_name,
 					i_address: i_address,
 					i_loca: i_loca,
@@ -292,7 +286,8 @@ tr td, th {
 				success:function(response){
 					if (response == 1) {						
 					//location.href='./ad_selectOne.do';
-					alert('정상적으로 수정되었습니다.');
+					alert('정상적으로 등록되었습니다.');
+					window.close();
 					}
 				},
 				error: function(){
@@ -301,31 +296,7 @@ tr td, th {
 			});
 		}
 	</script>
-	<script type="text/javascript">
-		function deleteDay(){
-			if(confirm('삭제하시겠습니까?')){
-				
-			var i_number = $('#i_number').val();
-			$.ajax({
-				url:'deleteDay.do',
-				type: 'post',
-				data: {
-					i_number: i_number
-				},
-				success: function(result){
-					if(result==1){
-					alert('삭제되었습니다.');
-					window.close();						
-					}
-				},
-				error: function(){
-					alert('Error!');
-				}
-			});
-			}
-		}
-	</script>
-
+	
 	
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
 

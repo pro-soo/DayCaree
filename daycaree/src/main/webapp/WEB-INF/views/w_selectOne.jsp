@@ -30,7 +30,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<title>전체 어린이집 정보 페이지</title>
+<title>어린이집 상세보기 페이지</title>
 
 <link href="./resources/css/main.550dcf66.css" rel="stylesheet">
 <style type="text/css">
@@ -49,9 +49,9 @@ tr td, th {
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#navbar-collapse"
 						aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span><span
+						<span class="sr-only">Toggle navigation</span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span>
+							class="icon-bar"></span>
 					</button>
 					<p class="navbar-brand">
 						<img src="./resources/images/mashup-icon.svg"
@@ -61,16 +61,7 @@ tr td, th {
 
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a title="">${list[0].m_id}님 환영합니다!</a></li>
-						<li><a href="./allday.do" title="">Home</a></li>
-						<li><a href="./warning.do" title="">위반시설 조회</a></li>
-						<li><a href="./project.html" title="">공지사항</a></li>
-						<li>
-							<p>
-								<a href="./components.html" class="btn btn-default navbar-btn"
-									title="">로그아웃</a>
-							</p>
-						</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -81,57 +72,100 @@ tr td, th {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-8 col-md-offset-2">
-					<h1 class="text-center">Information</h1>
-					<p align="center">법 위반 사실 공표 제도에 대한 근거를 마련한 영유아보육법이 <br>
-					<a style="color: red;">2013년 12월 5일</a>부터 시행됨에 따라 시행 이후의 위반사실을 대상으로 공표 합니다.</p>
+					<h2 class="text-center">상세정보</h2>
+					<p></p>
 
-					<table class="table table-hover" style="width: 100%">
-						<colgroup>
-							<col style="width: 5%">
-								<col style="width: 15%">
-								<col style="width: 15%">
-								<col style="width: 13%">
-								<col style="width: 12%">
-								<col style="width: 12%">
-								<col style="width: 38%">
-						</colgroup>
-						<thead>
+					<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b746de34a877fc1e36118c594a3112e2&libraries=services,clusterer,drawing"></script>
+					<div id="map" style="width: 100%; height: 400px;"></div>
+					<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center : new kakao.maps.LatLng(33.450701,
+									126.570667), // 지도의 중심좌표
+							level : 3
+						// 지도의 확대 레벨
+						};
+
+						// 지도를 생성합니다    
+						var map = new kakao.maps.Map(mapContainer, mapOption);
+
+						// 주소-좌표 변환 객체를 생성합니다
+						var geocoder = new kakao.maps.services.Geocoder();
+
+						// 주소로 좌표를 검색합니다
+						geocoder
+								.addressSearch(
+										'${one[0].w_address}',
+										function(result, status) {
+
+											// 정상적으로 검색이 완료됐으면 
+											if (status === kakao.maps.services.Status.OK) {
+
+												var coords = new kakao.maps.LatLng(
+														result[0].y,
+														result[0].x);
+
+												// 결과값으로 받은 위치를 마커로 표시합니다
+												var marker = new kakao.maps.Marker(
+														{
+															map : map,
+															position : coords
+														});
+
+												// 인포윈도우로 장소에 대한 설명을 표시합니다
+												var infowindow = new kakao.maps.InfoWindow(
+														{
+															content : '<div style="width:150px;text-align:center;padding:6px 0;">${one[0].w_name}</div>'
+														});
+												infowindow.open(map, marker);
+
+												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+												map.setCenter(coords);
+											}
+										});
+					</script>
+					<c:forEach var="vo" items="${one}">
+						<table class="table table-hover" style="width: 100%;">
+							
 							<tr>
-								<th colspan="7" style="text-align: right"><input
-									id="search" type="text"> <input id="" type="hidden"></th>
-								<th colspan="7" style="text-align: right"><button
-										type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
+								<th colspan="1">지역</th>
+								<td colspan="3">${vo.w_loca}</td>
+								<th colspan="4">어린이집 유형</th>
+								<td colspan="2">${vo.w_type}</td>
 							</tr>
 							<tr>
-								<th>번호</th>
-								<th>시도/시군구</th>
-								<th>어린이집 이름</th>
-								<th>유형</th>
-								<th>대표자</th>
-								<th>원장</th>
+								<th rowspan="2">어린이집 이름</th>
+								<th>현재</th>
+								<td>${vo.w_name }</td>
+								<th rowspan="2">대표자</th>
+								<th>현재</th>
+								<td>${vo.w_leader }</td>
+								<th rowspan="2">원장</th>
+								<th>현재</th>
+								<td>${vo.w_boss }</td>
+							</tr>
+							<tr>
+								<th>위반당시</th>
+								<td>${vo.w_name }</td>
+								<th>위반당시</th>
+								<td>${vo.w_leader }</td>
+								<th>위반당시</th>
+								<td>${vo.w_boss }</td>
+							</tr>
+							
+							<tr>
 								<th>어린이집 주소</th>
+								<td colspan="8">${vo.w_address}</td>
 							</tr>
-						</thead>
-					</table>
-					<c:forEach var="vo" items="${all}">
-						<table class="table table-hover" style="width: 100%">
-							<colgroup>
-								<col style="width: 5%">
-								<col style="width: 15%">
-								<col style="width: 15%">
-								<col style="width: 13%">
-								<col style="width: 12%">
-								<col style="width: 12%">
-								<col style="width: 38%">
-							</colgroup>
-							<tr onclick="selectOne(${vo.w_number})">
-								<td id="w_number">${vo.w_number}</td>
-								<td>${vo.w_loca}</td>
-								<td id="w_name">${vo.w_name }</td>
-								<td>${vo.w_type}</td>
-								<td>${vo.w_leader}</td>
-								<td>${vo.w_boss}</td>
-								<td>${vo.w_address}</td>
+							<tr>
+								<th>위반 행위</th>
+								<td colspan="8">${vo.w_act}</td>
+							</tr>
+							<tr>
+								<th>처분 내용</th>
+								<td colspan="8">${vo.w_content}</td>
 							</tr>
 						</table>
 					</c:forEach>
@@ -140,6 +174,7 @@ tr td, th {
 			</div>
 		</div>
 	</div>
+
 
 	<footer class="footer-container white-text-container">
 		<div class="container">
@@ -188,34 +223,7 @@ tr td, th {
 		});
 	</script>
 
-	<script type="text/javascript">
-		function searchOne(){
-			var i_name = $('#search').val();				
-			consol.log("test : ");
-			$.ajax({
-				url: 'searchOne.do',
-				type: 'post',
-				data: i_name,
-				sucess: function(search){
-					alert(search+'');
-				},
-				error: function(){
-					alert('error');
-				}
-				
-			});
-			
-		}
-	</script>
-	<script type="text/javascript">
-		function selectOne(w_number){
-			var url = 'w_selectOne.do?w_number='+w_number;
-			var name = 'w_SelectOne';
-			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
-			window.open(url, name, option);
-		}
-	</script>
-
+	
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
 
 <script>

@@ -61,9 +61,9 @@ tr td, th {
 
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a title="">${list[0].m_id}님 환영합니다!</a></li>
-						<li><a href="./allday.do" title="">Home</a></li>
-						<li><a href="./warning.do" title="">위반시설 조회</a></li>
+						<li><a title="">${list[0].m_id} 상태입니다!</a></li>
+						<li><a href="./ad_allday.do" title="">어린이집 등록</a></li>
+						<li><a href="./ad_warning.do" title="">위반시설 등록</a></li>
 						<li><a href="./project.html" title="">공지사항</a></li>
 						<li>
 							<p>
@@ -97,10 +97,12 @@ tr td, th {
 						</colgroup>
 						<thead>
 							<tr>
-								<th colspan="7" style="text-align: right"><input
+								<th style="text-align: right"><input
 									id="search" type="text"> <input id="" type="hidden"></th>
-								<th colspan="7" style="text-align: right"><button
+								<th style="text-align: right"><button
 										type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
+							<th colspan="7" style="text-align: right"><button
+										type="button" class="btn btn-primary" onclick="insertDay()">등록</button></th>
 							</tr>
 							<tr>
 								<th>번호</th>
@@ -209,13 +211,21 @@ tr td, th {
 	</script>
 	<script type="text/javascript">
 		function selectOne(w_number){
-			var url = 'w_selectOne.do?w_number='+w_number;
-			var name = 'w_SelectOne';
+			var url = 'ad_w_selectOne.do?w_number='+w_number;
+			var name = 'ad_w_SelectOne';
 			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
 			window.open(url, name, option);
 		}
 	</script>
-
+	
+<script type="text/javascript">
+		function insertDay(){
+			var url = 'ad_w_insertDaypage.do';
+			var name = 'ad_w_insertDay';
+			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
+			window.open(url, name, option);
+		}
+	</script>
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
 
 <script>

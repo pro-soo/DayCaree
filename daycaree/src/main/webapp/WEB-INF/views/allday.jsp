@@ -107,9 +107,9 @@ tr td, th {
 					<c:forEach var="vo" items="${all}">
 						<table class="table table-hover" style="width: 100%">
 							<colgroup>
-								<col style="width: 8%">
-								<col style="width: 22%">
-								<col style="width: 70%">
+								<col style="width: 10%">
+							<col style="width: 30%">
+							<col style="width: 60%">
 							</colgroup>
 							<tr onclick="selectOne(${vo.i_number})">
 								<td id="i_number">${vo.i_number}</td>

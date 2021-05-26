@@ -30,7 +30,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<title>전체 어린이집 정보 페이지</title>
+<title>어린이집 상세보기 페이지</title>
 
 <link href="./resources/css/main.550dcf66.css" rel="stylesheet">
 <style type="text/css">
@@ -49,9 +49,9 @@ tr td, th {
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#navbar-collapse"
 						aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span><span
+						<span class="sr-only">Toggle navigation</span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span>
+							class="icon-bar"></span>
 					</button>
 					<p class="navbar-brand">
 						<img src="./resources/images/mashup-icon.svg"
@@ -61,16 +61,7 @@ tr td, th {
 
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a title="">${list[0].m_id}님 환영합니다!</a></li>
-						<li><a href="./allday.do" title="">Home</a></li>
-						<li><a href="./warning.do" title="">위반시설 조회</a></li>
-						<li><a href="./project.html" title="">공지사항</a></li>
-						<li>
-							<p>
-								<a href="./components.html" class="btn btn-default navbar-btn"
-									title="">로그아웃</a>
-							</p>
-						</li>
+						
 					</ul>
 				</div>
 			</div>
@@ -81,65 +72,64 @@ tr td, th {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-8 col-md-offset-2">
-					<h1 class="text-center">Information</h1>
-					<p align="center">법 위반 사실 공표 제도에 대한 근거를 마련한 영유아보육법이 <br>
-					<a style="color: red;">2013년 12월 5일</a>부터 시행됨에 따라 시행 이후의 위반사실을 대상으로 공표 합니다.</p>
+					<h2 class="text-center">정보수정</h2>
+					<p></p>
+					<form method="post">
+						<c:forEach var="vo" items="${one}">
+							<table class="table table-hover" style="width: 100%;">
+								<tr>
+									<th>지역<input type="hidden" id="w_number"
+										value="${vo.w_number }"></th>
+									<td><input type="text" class="form-control input-sm" id="w_loca"
+										value="${vo.w_loca}"></td>
+									<th colspan="2">어린이집 유형</th>
+									<td colspan="2"><input type="text" class="form-control input-sm" id="w_type"
+										value="${vo.w_type}"></td>
+								</tr>
+								<tr>
+									<th>어린이집 이름</th>
+									<td><input type="text" class="form-control input-sm" id="w_name" value="${vo.w_name}"></td>
+									<th>대표자</th>
+									<td><input type="text" class="form-control input-sm" id="w_leader"
+										value="${vo.w_leader}"></td>
+									<th>원장</th>
+									<td><input type="text" class="form-control input-sm" id="w_boss" value="${vo.w_boss}"></td>
+								</tr>
+								
+								<tr>
+									<th>어린이집 주소</th>
+									<td colspan="8"><input type="text" class="form-control input-sm" id="w_address"
+										value="${vo.w_address}"></td>
+								</tr>
+								<tr>
+									<th>위반 행위</th>
+									<td colspan="8"><input type="text" class="form-control input-sm" id="w_act"
+										value="${vo.w_act}"></td>
+								</tr>
+								<tr>
+									<th>처분 내용</th>
+									<td colspan="8"><input type="text" class="form-control input-sm" id="w_content"
+										value="${vo.w_content}"></td>
+								</tr>
+								<tr>
+									<td colspan="8">
+										<button class="btn btn-primary" type="button"
+											onclick="updateDay()">수정</button>
+										<button class="btn btn-warning" type="reset">취소</button>
+										<button class="btn btn-danger" type="button"
+											onclick="deleteDay()">삭제</button>
+									</td>
+								</tr>
+							</table>
+						</c:forEach>
+					</form>
 
-					<table class="table table-hover" style="width: 100%">
-						<colgroup>
-							<col style="width: 5%">
-								<col style="width: 15%">
-								<col style="width: 15%">
-								<col style="width: 13%">
-								<col style="width: 12%">
-								<col style="width: 12%">
-								<col style="width: 38%">
-						</colgroup>
-						<thead>
-							<tr>
-								<th colspan="7" style="text-align: right"><input
-									id="search" type="text"> <input id="" type="hidden"></th>
-								<th colspan="7" style="text-align: right"><button
-										type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
-							</tr>
-							<tr>
-								<th>번호</th>
-								<th>시도/시군구</th>
-								<th>어린이집 이름</th>
-								<th>유형</th>
-								<th>대표자</th>
-								<th>원장</th>
-								<th>어린이집 주소</th>
-							</tr>
-						</thead>
-					</table>
-					<c:forEach var="vo" items="${all}">
-						<table class="table table-hover" style="width: 100%">
-							<colgroup>
-								<col style="width: 5%">
-								<col style="width: 15%">
-								<col style="width: 15%">
-								<col style="width: 13%">
-								<col style="width: 12%">
-								<col style="width: 12%">
-								<col style="width: 38%">
-							</colgroup>
-							<tr onclick="selectOne(${vo.w_number})">
-								<td id="w_number">${vo.w_number}</td>
-								<td>${vo.w_loca}</td>
-								<td id="w_name">${vo.w_name }</td>
-								<td>${vo.w_type}</td>
-								<td>${vo.w_leader}</td>
-								<td>${vo.w_boss}</td>
-								<td>${vo.w_address}</td>
-							</tr>
-						</table>
-					</c:forEach>
 
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 	<footer class="footer-container white-text-container">
 		<div class="container">
@@ -187,35 +177,69 @@ tr td, th {
 			scrollRevelation('.reveal');
 		});
 	</script>
-
-	<script type="text/javascript">
-		function searchOne(){
-			var i_name = $('#search').val();				
-			consol.log("test : ");
+<script type="text/javascript">
+		function updateDay(){
+				var w_number = $('#w_number').val();
+				var w_name = $('#w_name').val();
+				var w_address = $('#w_address').val();
+				var w_loca = $('#w_loca').val();
+				var w_type = $('#w_type').val();
+				var w_leader = $('#w_leader').val();
+				var w_boss = $('#w_boss').val();
+				var w_act = $('#w_act').val();
+				var w_content = $('#w_content').val();
 			$.ajax({
-				url: 'searchOne.do',
+				url:'w_updateOne.do',
 				type: 'post',
-				data: i_name,
-				sucess: function(search){
-					alert(search+'');
+				dataType: 'json',
+				data: {
+					w_number:w_number,
+					w_name:w_name,
+					w_address: w_address,
+					w_loca: w_loca,
+					w_type: w_type,
+					w_leader: w_leader,
+					w_boss: w_boss,
+					w_act: w_act,
+					w_content: w_content
+				},
+				success:function(response){
+					if (response == 1) {						
+					//location.href='./ad_selectOne.do';
+					alert('정상적으로 수정되었습니다.');
+					}
 				},
 				error: function(){
-					alert('error');
+					alert('Error!');
 				}
-				
 			});
-			
 		}
 	</script>
 	<script type="text/javascript">
-		function selectOne(w_number){
-			var url = 'w_selectOne.do?w_number='+w_number;
-			var name = 'w_SelectOne';
-			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
-			window.open(url, name, option);
+		function deleteDay(){
+			if(confirm('삭제하시겠습니까?')){
+				
+			var w_number = $('#w_number').val();
+			$.ajax({
+				url:'w_deleteDay.do',
+				type: 'post',
+				data: {
+					w_number: w_number
+				},
+				success: function(result){
+					if(result==1){
+					alert('삭제되었습니다.');
+					window.close();						
+					}
+				},
+				error: function(){
+					alert('Error!');
+				}
+			});
+			}
 		}
 	</script>
-
+	
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
 
 <script>
