@@ -30,7 +30,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<title>위반시설 수정 페이지</title>
+<title>공지사항 수정 페이지</title>
 
 <link href="./resources/css/main.550dcf66.css" rel="stylesheet">
 <style type="text/css">
@@ -78,41 +78,25 @@ tr td, th {
 						<c:forEach var="vo" items="${one}">
 							<table class="table table-hover" style="width: 100%;">
 								<tr>
-									<th>지역<input type="hidden" id="w_number"
-										value="${vo.w_number }"></th>
-									<td><input type="text" class="form-control input-sm" id="w_loca"
-										value="${vo.w_loca}"></td>
-									<th colspan="2">어린이집 유형</th>
-									<td colspan="2"><input type="text" class="form-control input-sm" id="w_type"
-										value="${vo.w_type}"></td>
+									<th>번호</th>
+									<td><input type="text"
+										value="${vo.n_postnum }" disabled="disabled">
+										<input type="hidden" id="n_postnum"
+										value="${vo.n_postnum }"></td>
+									<th>날짜</th>
+									<td><input type="text" class="form-control input-sm" id="n_date"
+										value="${vo.n_date}"></td>
 								</tr>
 								<tr>
-									<th>어린이집 이름</th>
-									<td><input type="text" class="form-control input-sm" id="w_name" value="${vo.w_name}"></td>
-									<th>대표자</th>
-									<td><input type="text" class="form-control input-sm" id="w_leader"
-										value="${vo.w_leader}"></td>
-									<th>원장</th>
-									<td><input type="text" class="form-control input-sm" id="w_boss" value="${vo.w_boss}"></td>
-								</tr>
-								
-								<tr>
-									<th>어린이집 주소</th>
-									<td colspan="8"><input type="text" class="form-control input-sm" id="w_address"
-										value="${vo.w_address}"></td>
+									<th>제목</th>
+									<td colspan="4"><input type="text" class="form-control input-sm" id="n_title" value="${vo.n_title}"></td>
 								</tr>
 								<tr>
-									<th>위반 행위</th>
-									<td colspan="8"><input type="text" class="form-control input-sm" id="w_act"
-										value="${vo.w_act}"></td>
+									<th>내용</th>
+									<td colspan="4"><textarea class="form-control" rows="5" id="n_content">${vo.n_content}</textarea></td>
 								</tr>
 								<tr>
-									<th>처분 내용</th>
-									<td colspan="8"><input type="text" class="form-control input-sm" id="w_content"
-										value="${vo.w_content}"></td>
-								</tr>
-								<tr>
-									<td colspan="8">
+									<td colspan="4">
 										<button class="btn btn-primary" type="button"
 											onclick="updateDay()">수정</button>
 										<button class="btn btn-warning" type="reset">취소</button>
@@ -179,29 +163,19 @@ tr td, th {
 	</script>
 <script type="text/javascript">
 		function updateDay(){
-				var w_number = $('#w_number').val();
-				var w_name = $('#w_name').val();
-				var w_address = $('#w_address').val();
-				var w_loca = $('#w_loca').val();
-				var w_type = $('#w_type').val();
-				var w_leader = $('#w_leader').val();
-				var w_boss = $('#w_boss').val();
-				var w_act = $('#w_act').val();
-				var w_content = $('#w_content').val();
-			$.ajax({
-				url:'w_updateOne.do',
+				var n_title = $('#n_title').val();
+				var n_content = $('#n_content').val();
+				var n_date = $('#n_date').val();
+				var n_postnum = $('#n_postnum').val();
+				$.ajax({
+				url:'n_updateOne.do',
 				type: 'post',
 				dataType: 'json',
 				data: {
-					w_number:w_number,
-					w_name:w_name,
-					w_address: w_address,
-					w_loca: w_loca,
-					w_type: w_type,
-					w_leader: w_leader,
-					w_boss: w_boss,
-					w_act: w_act,
-					w_content: w_content
+					n_title: n_title,
+					n_content: n_content,
+					n_date: n_date,
+					n_postnum: n_postnum
 				},
 				success:function(response){
 					if (response == 1) {						
@@ -219,12 +193,12 @@ tr td, th {
 		function deleteDay(){
 			if(confirm('삭제하시겠습니까?')){
 				
-			var w_number = $('#w_number').val();
+			var n_postnum = $('#n_postnum').val();
 			$.ajax({
-				url:'w_deleteDay.do',
+				url:'n_deleteDay.do',
 				type: 'post',
 				data: {
-					w_number: w_number
+					n_postnum: n_postnum
 				},
 				success: function(result){
 					if(result==1){

@@ -8,5 +8,6 @@
      <typeAlias type="com.daycaree.vo.MemberVO" alias="MemberVO"/>
      <typeAlias type="com.daycaree.vo.InformationVO" alias="InformationVO"/>
      <typeAlias type="com.daycaree.vo.WarningVO" alias="WarningVO"/>
+     <typeAlias type="com.daycaree.vo.NoticeVO" alias="NoticeVO"/>
     </typeAliases>
 </configuration>

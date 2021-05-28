@@ -50,7 +50,7 @@
           <li><a href="./allDaycare.do" title="">allDaycare</a></li>
           <li>
             <p>
-              <a href="./loinpage.do" class="btn btn-default navbar-btn" title="">로그인</a>
+              <a href="./loginpage.do" class="btn btn-default navbar-btn" title="">로그인</a>
             </p>
           </li>
 

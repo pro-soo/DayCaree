@@ -62,13 +62,13 @@ tr td, th {
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a title="">${list[0].m_id}님 환영합니다!</a></li>
-						<li><a href="./allday.do" title="">Home</a></li>
+						<li><a href="./allday.do" title="">어린이집 조회</a></li>
 						<li><a href="./warning.do" title="">위반시설 조회</a></li>
-						<li><a href="./project.html" title="">공지사항</a></li>
+						<li><a href="./notice.do" title="">공지사항</a></li>
 						<li>
 							<p>
-								<a href="./components.html" class="btn btn-default navbar-btn"
-									title="">로그아웃</a>
+								<a href="" class="btn btn-default navbar-btn"
+									title="" onclick="logout()">로그아웃</a>
 							</p>
 						</li>
 					</ul>
@@ -91,12 +91,7 @@ tr td, th {
 							<col style="width: 70%">
 						</colgroup>
 						<thead>
-							<tr>
-								<th colspan="3" style="text-align: right"><input
-									id="search" type="text"> <input id="" type="hidden"></th>
-								<th colspan="3" style="text-align: right"><button
-										type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
-							</tr>
+							
 							<tr>
 								<th>번호</th>
 								<th>어린이집 이름</th>
@@ -114,8 +109,10 @@ tr td, th {
 							<tr onclick="selectOne(${vo.i_number})">
 								<td id="i_number">${vo.i_number}</td>
 								<td id="i_name">${vo.i_name }</td>
-								<td>${vo.i_address}</td>
+								<td id="i_address">${vo.i_address}</td>
 							</tr>
+							<tbody id="go">
+							</tbody>
 						</table>
 					</c:forEach>
 
@@ -171,31 +168,28 @@ tr td, th {
 		});
 	</script>
 
-	<script type="text/javascript">
-		function searchOne(){
-			var i_name = $('#search').val();				
-			consol.log("test : ");
-			$.ajax({
-				url: 'searchOne.do',
-				type: 'post',
-				data: i_name,
-				sucess: function(search){
-					alert(search+'');
-				},
-				error: function(){
-					alert('error');
-				}
-				
-			});
-			
-		}
-	</script>
+	
 	<script type="text/javascript">
 		function selectOne(i_number){
 			var url = 'selectOne.do?i_number='+i_number;
 			var name = 'SelectOne';
 			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
 			window.open(url, name, option);
+		}
+	</script>
+	<script type="text/javascript">
+		function logout(){
+			if(confirm("로그아웃 하시겠습니까?")){
+			$.ajax({
+				url:'logout.do',
+				success: function(response){
+					location.href = './';
+				},
+				error: function(){
+					alert('Error!');
+				}
+			});
+			}
 		}
 	</script>
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.daycaree.vo.InformationVO;
 import com.daycaree.vo.MemberVO;
+import com.daycaree.vo.NoticeVO;
 import com.daycaree.vo.WarningVO;
 
 public interface daycareeDAO {
@@ -21,5 +22,10 @@ public interface daycareeDAO {
 	public int w_update(WarningVO warningVO) throws Exception; // 위반 어린이집 수정하기
 	public int w_deleteDay(int w_number) throws Exception; // 위반 어린이집 삭제하기
 	public int ad_w_insertDay(WarningVO warningVO) throws Exception; // 위반 어린이집 등록하기
+	public List<?> selectNotice() throws Exception; // 공지사항
+	public List<?> n_selectOne(int n_postnum) throws Exception; // 공지사항 상세보기
+	public int n_update(NoticeVO noticeVO) throws Exception; // 공지사항 수정하기
+	public int n_deleteDay(int n_postnum) throws Exception; // 공지사항 삭제하기
+	public int ad_n_insertDay(NoticeVO noticeVO) throws Exception; // 공지사항 등록하기
 
 }

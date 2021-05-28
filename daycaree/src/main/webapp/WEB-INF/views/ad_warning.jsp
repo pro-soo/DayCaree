@@ -30,7 +30,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<title>전체 어린이집 정보 페이지</title>
+<title>위반시설 정보 페이지</title>
 
 <link href="./resources/css/main.550dcf66.css" rel="stylesheet">
 <style type="text/css">
@@ -64,11 +64,11 @@ tr td, th {
 						<li><a title="">${list[0].m_id} 상태입니다!</a></li>
 						<li><a href="./ad_allday.do" title="">어린이집 등록</a></li>
 						<li><a href="./ad_warning.do" title="">위반시설 등록</a></li>
-						<li><a href="./project.html" title="">공지사항</a></li>
+						<li><a href="./ad_notice.do" title="">공지사항</a></li>
 						<li>
 							<p>
-								<a href="./components.html" class="btn btn-default navbar-btn"
-									title="">로그아웃</a>
+								<a href="" class="btn btn-default navbar-btn"
+									title="" onclick="logout()">로그아웃</a>
 							</p>
 						</li>
 					</ul>
@@ -97,10 +97,7 @@ tr td, th {
 						</colgroup>
 						<thead>
 							<tr>
-								<th style="text-align: right"><input
-									id="search" type="text"> <input id="" type="hidden"></th>
-								<th style="text-align: right"><button
-										type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
+								<th style="text-align: right"><input id="" type="hidden"></th>
 							<th colspan="7" style="text-align: right"><button
 										type="button" class="btn btn-primary" onclick="insertDay()">등록</button></th>
 							</tr>
@@ -224,6 +221,21 @@ tr td, th {
 			var name = 'ad_w_insertDay';
 			var option = 'width = 1000, height = 700, top = 100, left = 200, location = no';
 			window.open(url, name, option);
+		}
+	</script>
+	<script type="text/javascript">
+		function logout(){
+			if(confirm("로그아웃 하시겠습니까?")){
+			$.ajax({
+				url:'logout.do',
+				success: function(response){
+					location.href = './';
+				},
+				error: function(){
+					alert('Error!');
+				}
+			});
+			}
 		}
 	</script>
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 

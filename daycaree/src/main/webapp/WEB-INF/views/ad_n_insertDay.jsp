@@ -1,7 +1,13 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<% SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd");
+Calendar time = Calendar.getInstance();
+       
+String format_time1 = format1.format(time.getTime());%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +36,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<title>위반시설 수정 페이지</title>
+<title>위반시설 등록 페이지</title>
 
 <link href="./resources/css/main.550dcf66.css" rel="stylesheet">
 <style type="text/css">
@@ -61,7 +67,7 @@ tr td, th {
 
 				<div class="collapse navbar-collapse" id="navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
-						
+
 					</ul>
 				</div>
 			</div>
@@ -72,64 +78,37 @@ tr td, th {
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-8 col-md-offset-2">
-					<h2 class="text-center">정보수정</h2>
+					<h2 class="text-center">정보등록</h2>
 					<p></p>
-					<form method="post">
-						<c:forEach var="vo" items="${one}">
-							<table class="table table-hover" style="width: 100%;">
-								<tr>
-									<th>지역<input type="hidden" id="w_number"
-										value="${vo.w_number }"></th>
-									<td><input type="text" class="form-control input-sm" id="w_loca"
-										value="${vo.w_loca}"></td>
-									<th colspan="2">어린이집 유형</th>
-									<td colspan="2"><input type="text" class="form-control input-sm" id="w_type"
-										value="${vo.w_type}"></td>
-								</tr>
-								<tr>
-									<th>어린이집 이름</th>
-									<td><input type="text" class="form-control input-sm" id="w_name" value="${vo.w_name}"></td>
-									<th>대표자</th>
-									<td><input type="text" class="form-control input-sm" id="w_leader"
-										value="${vo.w_leader}"></td>
-									<th>원장</th>
-									<td><input type="text" class="form-control input-sm" id="w_boss" value="${vo.w_boss}"></td>
-								</tr>
-								
-								<tr>
-									<th>어린이집 주소</th>
-									<td colspan="8"><input type="text" class="form-control input-sm" id="w_address"
-										value="${vo.w_address}"></td>
-								</tr>
-								<tr>
-									<th>위반 행위</th>
-									<td colspan="8"><input type="text" class="form-control input-sm" id="w_act"
-										value="${vo.w_act}"></td>
-								</tr>
-								<tr>
-									<th>처분 내용</th>
-									<td colspan="8"><input type="text" class="form-control input-sm" id="w_content"
-										value="${vo.w_content}"></td>
-								</tr>
-								<tr>
-									<td colspan="8">
-										<button class="btn btn-primary" type="button"
-											onclick="updateDay()">수정</button>
-										<button class="btn btn-warning" type="reset">취소</button>
-										<button class="btn btn-danger" type="button"
-											onclick="deleteDay()">삭제</button>
-									</td>
-								</tr>
-							</table>
-						</c:forEach>
-					</form>
 
+					<form method="post">
+						<table class="table table-hover" style="width: 100%">
+							<tr>
+									<th>날짜</th>
+									<td><input type="text" class="form-control input-sm" id="n_date"
+										value="<%=format_time1 %>"></td>
+								</tr>
+								<tr>
+									<th>제목</th>
+									<td><input type="text" class="form-control input-sm" id="n_title" value=""></td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td><textarea class="form-control" rows="5" id="n_content"></textarea></td>
+								</tr>							<tr>
+								<td colspan="2">
+									<button class="btn btn-primary" type="button"
+										onclick="insertDay()">등록하기</button>
+									<button class="btn btn-warning" type="reset">취소</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 	<footer class="footer-container white-text-container">
 		<div class="container">
@@ -177,69 +156,35 @@ tr td, th {
 			scrollRevelation('.reveal');
 		});
 	</script>
-<script type="text/javascript">
-		function updateDay(){
-				var w_number = $('#w_number').val();
-				var w_name = $('#w_name').val();
-				var w_address = $('#w_address').val();
-				var w_loca = $('#w_loca').val();
-				var w_type = $('#w_type').val();
-				var w_leader = $('#w_leader').val();
-				var w_boss = $('#w_boss').val();
-				var w_act = $('#w_act').val();
-				var w_content = $('#w_content').val();
-			$.ajax({
-				url:'w_updateOne.do',
-				type: 'post',
-				dataType: 'json',
-				data: {
-					w_number:w_number,
-					w_name:w_name,
-					w_address: w_address,
-					w_loca: w_loca,
-					w_type: w_type,
-					w_leader: w_leader,
-					w_boss: w_boss,
-					w_act: w_act,
-					w_content: w_content
-				},
-				success:function(response){
-					if (response == 1) {						
-					//location.href='./ad_selectOne.do';
-					alert('정상적으로 수정되었습니다.');
-					}
-				},
-				error: function(){
-					alert('Error!');
-				}
-			});
-		}
-	</script>
 	<script type="text/javascript">
-		function deleteDay(){
-			if(confirm('삭제하시겠습니까?')){
-				
-			var w_number = $('#w_number').val();
+		function insertDay() {
+			var n_title = $('#n_title').val();
+			var n_content = $('#n_content').val();
+			var n_date = $('#n_date').val();
 			$.ajax({
-				url:'w_deleteDay.do',
-				type: 'post',
-				data: {
-					w_number: w_number
+				url : 'ad_n_insertDay.do',
+				type : 'post',
+				dataType : 'json',
+				data : {
+					n_title: n_title,
+					n_content: n_content,
+					n_date: n_date
 				},
-				success: function(result){
-					if(result==1){
-					alert('삭제되었습니다.');
-					window.close();						
+				success : function(response) {
+					if (response == 1) {
+						//location.href='./ad_selectOne.do';
+						alert('정상적으로 등록되었습니다.');
+						window.close();
 					}
 				},
-				error: function(){
+				error : function() {
 					alert('Error!');
 				}
 			});
-			}
 		}
 	</script>
-	
+
+
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
 
 <script>

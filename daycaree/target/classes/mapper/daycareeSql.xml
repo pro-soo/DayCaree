@@ -18,8 +18,15 @@
         select * from warning
     </select>
     
+    <select id="selectNotice" resultType="NoticeVO">
+        select * from notice
+    </select>
+    
     <select id="w_selectOne" parameterType="int" resultType="WarningVO">
         select * from warning where w_number=#{w_number}
+    </select>
+    <select id="n_selectOne" parameterType="int" resultType="NoticeVO">
+        select * from notice where n_postnum=#{n_postnum}
     </select>
     
     <select id="search" parameterType="String" resultType="InformationVO">
@@ -33,6 +40,9 @@
     <insert id="ad_w_insertDay" parameterType="WarningVO">
         insert into warning values(w_number_seq.nextval,#{w_name}, #{w_address}, #{w_loca}, #{w_type}, #{w_leader}, #{w_boss},#{w_act},#{w_content})
     </insert>
+    <insert id="ad_n_insertDay" parameterType="NoticeVO">
+        insert into notice values(#{n_title},#{n_content},#{n_date},n_postnum_seq.nextval)
+    </insert>
     <update id="update" parameterType="InformationVO">
         update information set i_name=#{i_name}, i_address=#{i_address}, i_loca=#{i_loca}, i_type=#{i_type}, i_state=#{i_state}, i_cctv=#{i_cctv}, i_cctv_all=#{i_cctv_all}, i_cctv_bo=#{i_cctv_bo}, i_cctv_gong=#{i_cctv_gong}, i_cctv_nol=#{i_cctv_nol}, i_cctv_sik=#{i_cctv_sik}, i_cctv_gang=#{i_cctv_gang}, i_cctv_jo=#{i_cctv_jo},
         i_cctv_bok=#{i_cctv_bok}, i_cctv_office=#{i_cctv_office}, i_cctv_yang=#{i_cctv_yang}, i_cctv_out=#{ i_cctv_out}, i_cctv_time=#{i_cctv_time}, i_cctv_hd=#{i_cctv_hd}, i_cctv_date=#{ i_cctv_date}, i_cctv_money=#{i_cctv_money}, i_system=#{i_system} where i_number=#{i_number}
@@ -40,11 +50,17 @@
     <update id="w_update" parameterType="WarningVO">
         update warning set w_name=#{w_name}, w_address=#{w_address}, w_loca=#{w_loca}, w_type=#{w_type}, w_leader=#{w_leader}, w_boss=#{w_boss},w_act=#{w_act},w_content=#{w_content} where w_number=#{w_number}
     </update>
+    <update id="n_update" parameterType="NoticeVO">
+        update notice set n_title=#{n_title}, n_content=#{n_content}, n_date=#{n_date} where n_postnum=#{n_postnum}
+    </update>
     
     <delete id="deleteDay" parameterType="int">
         delete from information where i_number=#{i_number}
     </delete>
     <delete id="w_deleteDay" parameterType="int">
         delete from warning where w_number=#{w_number}
+    </delete>
+    <delete id="n_deleteDay" parameterType="int">
+        delete from notice where n_postnum=#{n_postnum}
     </delete>
 </mapper>

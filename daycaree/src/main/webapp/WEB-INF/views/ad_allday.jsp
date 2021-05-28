@@ -64,11 +64,11 @@ tr td, th {
 						<li><a title="">${list[0].m_id} 상태입니다!</a></li>
 						<li><a href="./ad_allday.do" title="">어린이집 등록</a></li>
 						<li><a href="./ad_warning.do" title="">위반시설 등록</a></li>
-						<li><a href="./project.html" title="">공지사항</a></li>
+						<li><a href="./ad_notice.do" title="">공지사항</a></li>
 						<li>
 							<p>
-								<a href="./components.html" class="btn btn-default navbar-btn"
-									title="">로그아웃</a>
+								<a href="" class="btn btn-default navbar-btn"
+									title="" onclick="logout()">로그아웃</a>
 							</p>
 						</li>
 					</ul>
@@ -92,10 +92,7 @@ tr td, th {
 						</colgroup>
 						<thead>
 							<tr>
-								<th colspan="3" style="text-align: right"><input
-									id="search" type="text"> <input id="" type="hidden"></th>
-								<th colspan="3" style="text-align: right"><button
-										type="button" class="btn btn-primary" onclick="searchOne()">검색</button></th>
+								<th colspan="3" style="text-align: right"><input id="" type="hidden"></th>
 										<th colspan="3" style="text-align: right"><button
 										type="button" class="btn btn-primary" onclick="insertDay()">등록</button></th>
 							</tr>
@@ -109,9 +106,9 @@ tr td, th {
 					<c:forEach var="vo" items="${all}">
 						<table class="table table-hover" style="width: 100%">
 							<colgroup>
-								<col style="width: 8%">
-								<col style="width: 22%">
-								<col style="width: 70%">
+								<col style="width: 10%">
+								<col style="width: 30%">
+								<col style="width: 60%">
 							</colgroup>
 							<tr onclick="selectOne(${vo.i_number})">
 								<td id="i_number">${vo.i_number}</td>
@@ -174,25 +171,6 @@ tr td, th {
 	</script>
 
 	<script type="text/javascript">
-		function searchOne(){
-			var i_name = $('#search').val();				
-			consol.log("test : ");
-			$.ajax({
-				url: 'searchOne.do',
-				type: 'post',
-				data: i_name,
-				sucess: function(search){
-					alert(search+'');
-				},
-				error: function(){
-					alert('error');
-				}
-				
-			});
-			
-		}
-	</script>
-	<script type="text/javascript">
 		function selectOne(i_number){
 			var url = 'ad_selectOne.do?i_number='+i_number;
 			var name = 'ad_SelectOne';
@@ -208,7 +186,21 @@ tr td, th {
 			window.open(url, name, option);
 		}
 	</script>
-
+<script type="text/javascript">
+		function logout(){
+			if(confirm("로그아웃 하시겠습니까?")){
+			$.ajax({
+				url:'logout.do',
+				success: function(response){
+					location.href = './';
+				},
+				error: function(){
+					alert('Error!');
+				}
+			});
+			}
+		}
+	</script>
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID 
 
 <script>

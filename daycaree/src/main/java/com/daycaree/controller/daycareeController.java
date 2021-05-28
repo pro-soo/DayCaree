@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.daycaree.service.daycareeService;
 import com.daycaree.vo.InformationVO;
 import com.daycaree.vo.MemberVO;
+import com.daycaree.vo.NoticeVO;
 import com.daycaree.vo.WarningVO;
 
 import oracle.net.aso.w;
@@ -250,18 +251,25 @@ public class daycareeController {
 		PrintWriter out = response.getWriter();
 		out.print(cnt);
 	}
-	
-	@RequestMapping(value="/searchOne.do", method=RequestMethod.POST)	// 검색하기 기능
-	public void searchOne(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		System.out.println("넘어온다.");
-		String i_name = request.getParameter("i_name");
-		System.out.println(i_name);
+	@RequestMapping(value="/n_updateOne.do", method=RequestMethod.POST)	// 공지사항 수정 기능(관리자)
+	public void n_updateDay(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		List<?> search = daycareeService.search(i_name);
-		System.out.println(search);
+		String n_title = request.getParameter("n_title");
+		String n_content = request.getParameter("n_content");
+		String n_date = request.getParameter("n_date");
+		int n_postnum = Integer.parseInt(request.getParameter("n_postnum"));
+		
+		NoticeVO noticeVO = new NoticeVO();
+		noticeVO.setN_title(n_title);
+		noticeVO.setN_content(n_content);
+		noticeVO.setN_date(n_date);
+		noticeVO.setN_postnum(n_postnum);
+		
+		int cnt = daycareeService.n_update(noticeVO);
+		
 		response.setContentType("text/plain;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.print(search);
+		out.print(cnt);
 	}
 	
 	@RequestMapping(value="/deleteDay.do", method=RequestMethod.POST)	// 어린이집 삭제하기 기능 (관리자)
@@ -284,6 +292,16 @@ public class daycareeController {
 		PrintWriter out = response.getWriter();
 		out.print(cnt);
 	}
+	@RequestMapping(value="/n_deleteDay.do", method=RequestMethod.POST)	// 공지사항 삭제하기 기능 (관리자)
+	public void n_deleteDay(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		int n_postnum = Integer.parseInt(request.getParameter("n_postnum"));
+		
+		int cnt = daycareeService.n_deleteDay(n_postnum);
+		
+		response.setContentType("text/plain;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(cnt);
+	}
 	
 	@RequestMapping(value="/ad_insertDaypage.do", method=RequestMethod.GET)		// 어린이집 등록기능 페이지 (관리자)
 	public String ad_insertDay(Locale locale, Model model) throws Exception{
@@ -292,6 +310,10 @@ public class daycareeController {
 	@RequestMapping(value="/ad_w_insertDaypage.do", method=RequestMethod.GET)		// 위반시설 등록기능 페이지 (관리자)
 	public String ad_w_insertDay(Locale locale, Model model) throws Exception{
 		return "ad_w_insertDay";
+	}
+	@RequestMapping(value="/ad_n_insertDaypage.do", method=RequestMethod.GET)		// 공지사항 등록기능 페이지 (관리자)
+	public String ad_n_insertDay(Locale locale, Model model) throws Exception{
+		return "ad_n_insertDay";
 	}
 	
 	@RequestMapping(value="/ad_insertDay.do", method=RequestMethod.POST)	// 어린이집 정보 등록 기능(관리자)
@@ -379,5 +401,72 @@ public class daycareeController {
 		response.setContentType("text/plain;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(cnt);
+	}
+	@RequestMapping(value="/ad_n_insertDay.do", method=RequestMethod.POST)	// 공지사항 등록 기능(관리자)
+	public void ad_n_insertDay(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		String n_title = request.getParameter("n_title");
+		String n_content = request.getParameter("n_content");
+		String n_date = request.getParameter("n_date");
+		
+		NoticeVO noticeVO = new NoticeVO();
+		noticeVO.setN_title(n_title);
+		noticeVO.setN_content(n_content);
+		noticeVO.setN_date(n_date);
+		
+		int cnt = daycareeService.ad_n_insertDay(noticeVO);
+		
+		response.setContentType("text/plain;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(cnt);
+	}
+	@RequestMapping(value="/ad_notice.do", method=RequestMethod.GET)	// 공지사항 조회 (관리자)
+	public String ad_notice(HttpServletRequest request) throws Exception{
+		
+		List<?> all =daycareeService.selectNotice();
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("all", all);
+		return "ad_notice";
+	}
+	@RequestMapping(value="/notice.do", method=RequestMethod.GET)	// 공지사항 조회
+	public String notice(HttpServletRequest request) throws Exception{
+		
+		List<?> all =daycareeService.selectNotice();
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("all", all);
+		return "notice";
+	}
+	@RequestMapping(value="/ad_n_selectOne.do", method=RequestMethod.GET)	// 공지사항 상세보기 기능 (관리자)
+	public String ad_n_selectOne(HttpServletRequest request) throws Exception{
+		
+		int n_postnum = Integer.parseInt(request.getParameter("n_postnum"));
+		
+		List<?> one =daycareeService.n_selectOne(n_postnum);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("one", one);
+		return "ad_n_selectOne";
+	}
+	@RequestMapping(value="/n_selectOne.do", method=RequestMethod.GET)	// 공지사항 상세보기 기능 
+	public String n_selectOne(HttpServletRequest request) throws Exception{
+		
+		int n_postnum = Integer.parseInt(request.getParameter("n_postnum"));
+		
+		List<?> one =daycareeService.n_selectOne(n_postnum);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("one", one);
+		return "n_selectOne";
+	}
+	
+	@RequestMapping(value="/logout.do",method=RequestMethod.GET)	// 로그아웃 기능
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		PrintWriter out = response.getWriter();
+		out.print(1);
 	}
 }

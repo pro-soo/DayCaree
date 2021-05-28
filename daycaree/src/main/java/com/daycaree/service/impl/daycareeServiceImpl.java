@@ -11,6 +11,7 @@ import com.daycaree.service.daycareeService;
 import com.daycaree.service.dao.daycareeDAO;
 import com.daycaree.vo.InformationVO;
 import com.daycaree.vo.MemberVO;
+import com.daycaree.vo.NoticeVO;
 import com.daycaree.vo.WarningVO;
 
 @Service("daycareeService")
@@ -77,6 +78,31 @@ public class daycareeServiceImpl implements daycareeService{
 	@Override
 	public int ad_w_insertDay(WarningVO warningVO) throws Exception {	// 위반 어린이집 등록하기
 		return daycareeDAO.ad_w_insertDay(warningVO);
+	}
+
+	@Override
+	public List<?> selectNotice() throws Exception {	// 공지사항
+		return daycareeDAO.selectNotice();
+	}
+
+	@Override
+	public List<?> n_selectOne(int n_postnum) throws Exception {	// 공지사항 상세보기
+		return daycareeDAO.n_selectOne(n_postnum);
+	}
+
+	@Override
+	public int n_update(NoticeVO noticeVO) throws Exception {	// 공지사항 수정하기
+		return daycareeDAO.n_update(noticeVO);
+	}
+
+	@Override
+	public int n_deleteDay(int n_postnum) throws Exception {	// 공지사항 삭제하기
+		return daycareeDAO.n_deleteDay(n_postnum);
+	}
+
+	@Override
+	public int ad_n_insertDay(NoticeVO noticeVO) throws Exception {	// 공지사항 등록하기
+		return daycareeDAO.ad_n_insertDay(noticeVO);
 	}
 
 }

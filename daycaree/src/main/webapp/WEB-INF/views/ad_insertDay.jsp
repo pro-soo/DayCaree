@@ -30,7 +30,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<title>어린이집 상세보기 페이지</title>
+<title>어린이집 등록 페이지</title>
 
 <link href="./resources/css/main.550dcf66.css" rel="stylesheet">
 <style type="text/css">
@@ -78,100 +78,81 @@ tr td, th {
 					<form method="post">
 						<table class="table table-hover" style="width: 100%">
 							<colgroup>
-								<col style="width: 40%">
-								<col style="width: 60%">
+								<col style="width: 25%">
+								<col style="width: 25%">
+								<col style="width: 25%">
+								<col style="width: 25%">
 							</colgroup>
 							<tr>
 								<th>어린이집 이름</th>
 								<td><input type="text" class="form-control input-sm" name="i_name" id="i_name" value=" "></td>
-							</tr>
-							<tr>
 								<th>지역</th>
 								<td><input type="text" class="form-control input-sm" name="i_loca" id="i_loca" value=" "></td>
 							</tr>
+							
 							<tr>
 								<th>어린이집 주소</th>
 								<td><input type="text" class="form-control input-sm" name="i_address" id="i_address" value=" "></td>
-							</tr>
-							<tr>
 								<th>어린이집 유형</th>
 								<td><input type="text" class="form-control input-sm" name="i_type" id="i_type" value=" "></td>
 							</tr>
-
 							<tr>
 								<th>어린이집 상태</th>
 								<td><input type="text" class="form-control input-sm" name="i_state" id="i_state" value=" "></td>
-							</tr>
-							<tr>
 								<th>설치구분</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv" id="i_cctv" value=" "></td>
 							</tr>
 							<tr>
 								<th>총 설치대수</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_all" id="i_cctv_all" value="0"></td>
-							</tr>
-							<tr>
 								<th>필수설치_보육실</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_bo" id="i_cctv_bo" value="0"></td>
 							</tr>
 							<tr>
 								<th>필수설치_공동놀이실</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_gong" id="i_cctv_gong" value="0"></td>
-							</tr>
-							<tr>
 								<th>필수설치_놀이터</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_nol" id="i_cctv_nol" value="0"></td>
 							</tr>
 							<tr>
 								<th>필수설치_식당</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_sik" id="i_cctv_sik" value="0"></td>
-							</tr>
-							<tr>
 								<th>필수설치_강당</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_gang" id="i_cctv_gang" value="0"></td>
 							</tr>
 							<tr>
 								<th>조리실</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_jo" id="i_cctv_jo" value="0"></td>
-							</tr>
-							<tr>
 								<th>복도, 현관</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_bok" id="i_cctv_bok" value="0"></td>
 							</tr>
 							<tr>
 								<th>사무실</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_office" id="i_cctv_office" value="0"></td>
-							</tr>
-							<tr>
 								<th>양호실</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_yang" id="i_cctv_yang" value="0"></td>
 							</tr>
 							<tr>
 								<th>건물외부</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_out" id="i_cctv_out" value="0"></td>
-							</tr>
-							<tr>
 								<th>영상정보 보존기간</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_time" id="i_cctv_time" value=" "></td>
 							</tr>
+							
 							<tr>
 								<th>영상 화질</th>
 								<td><input type="text" class="form-control input-sm" name="i_cctv_hd" id="i_cctv_hd" value=" "></td>
-							</tr>
-							<tr>
 								<th>설치일자</th>
 								<td><input type="text" class="form-control input-sm" id="i_cctv_date" name="i_cctv_date" value=" "></td>
 							</tr>
 							<tr>
 								<th>설치운영비용</th>
 								<td><input type="text" class="form-control input-sm" id="i_cctv_money" name="i_cctv_money" value=" "></td>
-							</tr>
-							<tr>
 								<th>운영방식</th>
 								<td><input type="text" class="form-control input-sm" id="i_system" name="i_system" value=" "></td>
 							</tr>
 							<tr>
-							<td colspan="3">
+							<td colspan="4">
 							<button class="btn btn-primary" type="button" onclick="insertDay()">등록하기</button>
 							<button class="btn btn-warning" type="reset">취소</button>
 							</td>
